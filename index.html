@@ -21,7 +21,55 @@
 
         // Cria um componente chamado App que retorna um JSX que precisa ser transpilado
         function App() {
-            return <div>Meu App!</div>;
+            // So pode retornar 1 componente root pelo return, e este pode conter multiplos componentes abaixo dele.
+            // Aqui temos um exemplo de composicao de componentes
+            return (
+                <div>Meu App!
+                    <Titulo />
+                    <Button />
+                    <Compras />
+                </div>
+            );
+        }
+
+        // Um class component precisa extender a React.Component e retornar o componente em si atraves do metodo render
+        class Button extends React.Component {
+            render() {
+                // Por padrao as functions que tratam eventos comeca com handle no nome
+                const handleClick = (event) => {
+                    console.log(event.target.innerText);
+                }
+
+                // Para executar algo quando determinado evento acontecer, ele deve ser passado como function para o evento desejado como o onClick
+                return <button onClick={handleClick}>Comprar</button>;
+            }
+        }
+
+        // Function component sempre deve retornar um componente (ou ao menos null)
+        const Titulo = () => {
+            const numero = Math.random() * 1000;
+            return <h1>Meu título {numero}</h1>;
+        }
+
+        const Compras = () => {
+
+            // Hook de state que retorna a variavel com o valor inicial passado na funcao useState (nesse caso sera 0) como primeiro parametro
+            // , e uma funcao que permite atualizar o estado da variavel como segundo parametro
+            const [contador, setContador] = React.useState(0);
+
+            // As chamadas que atualizam estado devem ocorrer atraves de eventos pois isso vai causar o componente a ser renderizado.
+            // Caso o setContador abaixo acontecesse fora de uma function por exemplo, a app entratia em loop infinito.
+            const comprar = () => {
+                setContador(contador + 1);
+            }
+
+            return (
+                <div>
+                    <button onClick={comprar}>Comprar</button>
+                    <p>Total: {contador}</p>
+                    <p>Preço: R${contador * 250}</p>
+                </div>
+            )
         }
 
         // Renderiza o componente App no elemento cujo id == myapp
