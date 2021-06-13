@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React para Iniciantes</title>
+
+    <!-- Carrega componentes do React: essa dep possui pacotes utilizandos tanto no browser quanto no React Native -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <!-- ReactDOM possui componentes necessarios apenas para a utilizacao do React em browsers -->
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <!-- Babel e utilizado para compilar o JSX para functions JS -->
+    <script crossorigin src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+</head>
+<body>
+    <div id="myapp">My App</div>
+
+    <!-- Indicando ao Babel para transpilar o codigo JSX -->
+    <script type="text/babel">
+
+        // Cria um componente chamado App que retorna um JSX que precisa ser transpilado
+        function App() {
+            return <div>Meu App!</div>;
+        }
+
+        // Renderiza o componente App no elemento cujo id == myapp
+        ReactDOM.render(<App />, document.getElementById('myapp'));
+    </script>
+</body>
+</html>
